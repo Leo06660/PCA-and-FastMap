@@ -4,7 +4,7 @@
 # In[1]:
 
 
-class fastmap():
+class FastMap():
     
     def __init__(self, fastmap_wordlist):
 #         self.k = k
@@ -29,8 +29,8 @@ class fastmap():
         Ob_idx = fastmap_wordlist.index(Ob)+1
         old_ob_idx = Ob_idx
         while 1:
-            Oa_idx = find_farthest_obj(Ob_idx, fastmap_data)
-            Ob_idx = find_farthest_obj(Oa_idx, fastmap_data)
+            Oa_idx = self.find_farthest_obj(Ob_idx, fastmap_data)
+            Ob_idx = self.find_farthest_obj(Oa_idx, fastmap_data)
             if old_ob_idx == Ob_idx:
                 return Oa_idx, Ob_idx
             else:
@@ -56,18 +56,18 @@ class fastmap():
         else:
             coordinate_idx+=1
         # Find each farthest pair of fastmap_data
-        Oa_idx, Ob_idx = find_farthest_pair(self.fastmap_wordlist, fastmap_data)
+        Oa_idx, Ob_idx = self.find_farthest_pair(self.fastmap_wordlist, fastmap_data)
         # Calculate the coordinate for each iteration
         for obj_idx in range(1,len(self.fastmap_wordlist)+1):
-            d_ai = distance_function(Oa_idx, obj_idx, fastmap_data)
-            d_ab = distance_function(Oa_idx, Ob_idx, fastmap_data)
-            d_ib = distance_function(Ob_idx, obj_idx, fastmap_data)
+            d_ai = self.distance_function(Oa_idx, obj_idx, fastmap_data)
+            d_ab = self.distance_function(Oa_idx, Ob_idx, fastmap_data)
+            d_ib = self.distance_function(Ob_idx, obj_idx, fastmap_data)
             x = (d_ai**2+d_ab**2-d_ib**2)/(2*d_ab)
             self.output_k_coordinate[obj_idx-1][coordinate_idx]=x
         # Create new distance function which is new fastmap data
         new_fastmap_data = fastmap_data.copy() 
         for row in range(len(new_fastmap_data)):
-            D_old = distance_function(new_fastmap_data[row][0],
+            D_old = self.distance_function(new_fastmap_data[row][0],
                                       new_fastmap_data[row][1], 
                                       fastmap_data)
             xi = self.output_k_coordinate[int(new_fastmap_data[row][0]-1)][coordinate_idx]
