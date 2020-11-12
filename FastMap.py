@@ -1,10 +1,19 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[8]:
 
 
-class FastMap():
+import csv
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+# In[9]:
+
+
+class fastmap():
     
     def __init__(self, fastmap_wordlist):
 #         self.k = k
@@ -76,4 +85,16 @@ class FastMap():
         # Call FastMap function again with the input of new fastmap 
         self.result(k-1, new_fastmap_data, coordinate_idx)
         return self.output_k_coordinate
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
